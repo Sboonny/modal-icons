@@ -9,15 +9,21 @@
     <script type="module" src="/main.js" defer></script>
   </head>
   <body>
-    <dialog id="dialog">
-      <form action="" method="dialog">
-        <p>this is a dialog</p>
-        <button>ok</button>
+    <dialog id="megaDialog" modal-mode="mega">
+      <form method="dialog">
+        <header>
+          <h3>Title</h3>
+          <button value="cansel">Cansel</button>
+        </header>
+        <footer>
+          <menu>
+            <button value="confirm">Confirm</button>
+          </menu>
+        </footer>
       </form>
     </dialog>
+    <dialog id="miniDialog" modal-mode="mini"></dialog>
 
-    
-
-    <button onclick="dialog.showModal()">Open Dialog</button>
+    <button onclick="megaDialog.showModal()">Open Dialog</button>
   </body>
 </html>
