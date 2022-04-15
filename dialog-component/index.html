@@ -13,11 +13,12 @@
       <form method="dialog">
         <header>
           <h3>Title</h3>
-          <button value="cansel">Cansel</button>
+          <button onclick="this.closest('dialog').close()"></button>
         </header>
         <footer>
           <menu>
-            <button value="confirm">Confirm</button>
+          <button autofocus type="reset" onclick="this.closest('dialog').close()" value="cansel">Cansel</button>
+            <button type="submit" value="confirm">Confirm</button>
           </menu>
         </footer>
       </form>
