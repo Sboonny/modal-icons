@@ -15,6 +15,7 @@
           <h3>Title</h3>
           <button onclick="this.closest('dialog').close()"></button>
         </header>
+        <article>...</article>
         <footer>
           <menu>
           <button autofocus type="reset" onclick="this.closest('dialog').close()" value="cansel">Cansel</button>
@@ -23,7 +24,19 @@
         </footer>
       </form>
     </dialog>
-    <dialog id="miniDialog" modal-mode="mini"></dialog>
+    <dialog id="miniDialog" modal-mode="mini">
+      <form method="dialog">
+        <article>
+          <p>Do you wanna remove this user?</p>
+        </article>
+        <footer>
+          <menu>
+          <button autofocus type="reset" onclick="this.closest('dialog').close()" value="cansel">Cansel</button>
+            <button type="submit" value="confirm">Confirm</button>
+          </menu>
+        </footer>
+      </form>
+    </dialog>
 
     <button onclick="megaDialog.showModal()">Open Dialog</button>
   </body>
