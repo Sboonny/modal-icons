@@ -4,7 +4,7 @@
   // add removed event
   // removing loading attribute
 
-  export default async function(dialog) {
+  export default async function (dialog) {
     dialog.addEventListener('click', lightDismiss)
   }
 

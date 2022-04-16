@@ -36,7 +36,7 @@
         </article>
         <footer>
           <menu>
-          <button autofocus type="reset" onclick="this.closest('dialog').close()" value="cansel">Cansel</button>
+          <button autofocus type="reset" onclick="this.closest('dialog').close('cansel')" value="cansel">Cansel</button>
             <button type="submit" value="confirm">Confirm</button>
           </menu>
         </footer>
@@ -45,6 +45,7 @@
     
     <button onclick="miniDialog.showModal()">Open MiniDialog</button>
     <button onclick="megaDialog.showModal()">Open MegaDialog</button>
-    <script type="module" src="/main.js" ></script>
+    <script type="module" src="scripts/main.js" ></script>
+    <script type="module" src="scripts/dialog.js" ></script>
   </body>
 </html>
