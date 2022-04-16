@@ -52,6 +52,17 @@ dialog > form > header {
   padding-inline: var(--size-5);
 }
 
+dialog > form > footer {
+  background-color: var(--surface-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-3);
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-inline: var(--size-3);
+  padding-block: var(--size-3);
+}
+
 dialog > form > header > button {
   border-radius: var(--radius-round);
   padding: .75ch;
@@ -60,6 +71,17 @@ dialog > form > header > button {
   place-items: center;
   stroke: currentColor;
   stroke-width: 3px;
+}
+
+dialog > form > footer > menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-3);
+  padding-inline-start: 0;
+}
+
+dialog > form > footer > menu:only-child {
+  margin-inline-start: auto;
 }
 
 dialog:not([open]) {
@@ -82,12 +104,16 @@ dialog::backdrop {
   dialog > form > header {
     background: var(--surface-1)
   }
+  dialog > form > footer {
+    background: var(--surface-1);
+  }
 }
 
 @media (prefers-color-scheme: light) {
   dialog > form > article {
     background: var(--surface-1);
   }
+  
 }
 
 @media (max-width: 45em) {
