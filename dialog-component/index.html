@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dialog</title>
 
-    <script type="module" src="/main.js" defer></script>
   </head>
   <body>
     <dialog id="megaDialog" modal-mode="mega">
@@ -18,7 +17,7 @@
         <article>...</article>
         <footer>
           <menu>
-          <button autofocus type="reset" onclick="this.closest('dialog').close()" value="cansel">Cansel</button>
+            <button autofocus type="reset" onclick="this.closest('dialog').close()" value="cansel">Cansel</button>
             <button type="submit" value="confirm">Confirm</button>
           </menu>
         </footer>
@@ -37,7 +36,8 @@
         </footer>
       </form>
     </dialog>
-
+    
     <button onclick="megaDialog.showModal()">Open Dialog</button>
+    <script type="module" src="/main.js" ></script>
   </body>
 </html>
