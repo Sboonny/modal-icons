@@ -29,6 +29,19 @@ dialog > form {
   max-block-size: 80vw;
 }
 
+dialog > form > article {
+  overflow-y: scroll;
+  max-block-size: 100%;
+  overscroll-behavior-y: contain;
+  display: grid;
+  justify-items: flex-start;
+  gap: var(--size-3);
+  box-shadow: var(--shadow-2);
+  z-index: var(--layer-1);
+  padding-inline: var(--size-5);
+  padding-block: var(--size-3);
+}
+
 dialog > form > header {
   display: flex;
   gap: (var(--size-3), 1em);
@@ -68,6 +81,12 @@ dialog::backdrop {
   }
   dialog > form > header {
     background: var(--surface-1)
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  dialog > form > article {
+    background: var(--surface-1);
   }
 }
 
