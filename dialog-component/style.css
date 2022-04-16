@@ -22,6 +22,33 @@ dialog {
   box-shadow: var(--shadow-6);
 }
 
+dialog > form {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
+  max-block-size: 80vw;
+}
+
+dialog > form > header {
+  display: flex;
+  gap: (var(--size-3), 1em);
+  justify-content: space-between;
+  align-items: flex-start;
+  background: var(--surface-2);
+  padding-block: var(--size-3);
+  padding-inline: var(--size-5);
+}
+
+dialog > form > header > button {
+  border-radius: var(--radius-round);
+  padding: .75ch;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  place-items: center;
+  stroke: currentColor;
+  stroke-width: 3px;
+}
+
 dialog:not([open]) {
   pointer-events: none;
   opacity: 0;
@@ -38,6 +65,9 @@ dialog::backdrop {
 @media (prefers-color-scheme: dark) {
   dialog {
     border-block-start: var(--border-size-1) solid var(--surface-3);
+  }
+  dialog > form > header {
+    background: var(--surface-1)
   }
 }
 
