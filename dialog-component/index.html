@@ -12,12 +12,18 @@
       <form method="dialog">
         <header>
           <h3>Title</h3>
-          <button onclick="this.closest('dialog').close()"></button>
+          <button onclick="this.closest('dialog').close('close')"></button>
         </header>
-        <article>...</article>
+        <article>
+          <label for="userimage">Upload an image</label>
+          <input id="userimage" name="userimage" type="file">
+        </article>
         <footer>
           <menu>
-            <button autofocus type="reset" onclick="this.closest('dialog').close()" value="cansel">Cansel</button>
+            <button type="reset" value="clear">Clear</button>
+          </menu>
+          <menu>
+            <button autofocus type="reset" onclick="this.closest('dialog').close('cansel')" value="cansel">Cansel</button>
             <button type="submit" value="confirm">Confirm</button>
           </menu>
         </footer>
@@ -37,7 +43,8 @@
       </form>
     </dialog>
     
-    <button onclick="megaDialog.showModal()">Open Dialog</button>
+    <button onclick="miniDialog.showModal()">Open MiniDialog</button>
+    <button onclick="megaDialog.showModal()">Open MegaDialog</button>
     <script type="module" src="/main.js" ></script>
   </body>
 </html>
