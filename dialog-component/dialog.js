@@ -1,85 +1,49 @@
-// custom events to be added to <dialog>
-const dialogClosingEvent = new Event('closing')
-const dialogClosedEvent  = new Event('closed')
-const dialogOpeningEvent = new Event('opening')
-const dialogOpenedEvent  = new Event('opened')
-const dialogRemovedEvent = new Event('removed')
+// ToDo
+  // add closing and closed events
+  // add opening and opened events
+  const dialogOpeningEvent = new Event('opening')
+  const dialogOpenedEvent  = new Event('opened')
+  // add removed event
+  // removing loading attribute
 
-// track opening
-const dialogAttrObserver = new MutationObserver((mutations, observer) => {
-  mutations.forEach(async mutation => {
-    if (mutation.attributeName === 'open') {
+  //track opening
+  const openingMutation =  async (mutations, attrObeserver) => {
+    await mutations.reduce(async (animation , mutation) => {
+     await animation;
+     console.log(animation)
+     if(mutation.attributeName === 'open') {
       const dialog = mutation.target
-
+      // check if attribute has open in it 
+      // if it doesn't the function do nothing do nothing
       const isOpen = dialog.hasAttribute('open')
-      if (!isOpen) return
+      if(!isOpen) return
 
       dialog.removeAttribute('inert')
 
-      // set focus
+      // set focus and set fallback if focustarget doesn't exist
       const focusTarget = dialog.querySelector('[autofocus]')
-      focusTarget
-        ? focusTarget.focus()
-        : dialog.querySelector('button').focus()
+       if(focusTarget) {
+         focusTarget.focus()
+       } else {
+         dialog.querySelector('button').focus()
+       }
 
-      dialog.dispatchEvent(dialogOpeningEvent)
-      await animationsComplete(dialog)
-      dialog.dispatchEvent(dialogOpenedEvent)
-    }
-  })
-})
+       dialog.dispatchEvent(dialogOpeningEvent)
+       await animationComplete(dialog)
+       dialog.dispatchEvent(dialogOpenedEvent)
 
-// track deletion
-const dialogDeleteObserver = new MutationObserver((mutations, observer) => {
-  mutations.forEach(mutation => {
-    mutation.removedNodes.forEach(removedNode => {
-      if (removedNode.nodeName === 'DIALOG') {
-        dialog.removeEventListener('click', lightDismiss)
-        dialog.removeEventListener('close', dialogClose)
-        removedNode.dispatchEvent(dialogRemovedEvent)
-      }
-    })
-  })
-})
+     }
+     }, Promise.resolve())
+  }
 
-// wait for all dialog animations to complete their promises
-const animationsComplete = element =>
-  Promise.allSettled(
-    element.getAnimations().map(animation => 
-      animation.finished))
+  const dialogAttrObserver = new MutationObserver(openingMutation)
 
-// click outside the dialog handler
-const lightDismiss = ({target:dialog}) => {
-  if (dialog.nodeName === 'DIALOG')
-    dialog.close('dismiss')
-}
+  export default async function (dialog) {
+    dialog.addEventListener('click', lightDismiss)
+  }
 
-const dialogClose = async ({target:dialog}) => {
-  dialog.setAttribute('inert', '')
-  dialog.dispatchEvent(dialogClosingEvent)
-
-  await animationsComplete(dialog)
-
-  dialog.dispatchEvent(dialogClosedEvent)
-}
-
-// page load dialogs setup
-export default async function (dialog) {
-  dialog.addEventListener('click', lightDismiss)
-  dialog.addEventListener('close', dialogClose)
-
-  dialogAttrObserver.observe(dialog, { 
-    attributes: true,
-  })
-
-  dialogDeleteObserver.observe(document.body, {
-    attributes: false,
-    subtree: false,
-    childList: true,
-  })
-
-  // remove loading attribute
-  // prevent page load @keyframes playing
-  await animationsComplete(dialog)
-  dialog.removeAttribute('loading')
-}
+  const lightDismiss = ({target:dialog}) => {
+    //  after watching click on dialog element
+    //  it closes when if it's top-element is clicked
+      if (dialog.nodeName === 'DIALOG') dialog.close('dismiss')
+  }
