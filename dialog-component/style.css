@@ -4,7 +4,7 @@
 /* ------ */
 /* layout */
 /* ------ */
-html {
+html:has(dialog[open][modal-mode="mega"]) {
   overflow: hidden;
 }
 
