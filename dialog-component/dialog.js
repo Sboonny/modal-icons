@@ -3,7 +3,8 @@
   const dialogClosedEvent = new Event('closed')
   const dialogOpeningEvent = new Event('opening')
   const dialogOpenedEvent  = new Event('opened')
-  // add removed event
+  const dialogRemovedEvent  = new Event('remove')
+  
   // removing loading attribute
 
   //track opening
@@ -35,12 +36,33 @@
      }
      }, Promise.resolve())
   }
+  const deletingMutation =  async (mutations, attrObeserver) => {
+    mutations.forEach(mutation => {
+      mutation.removedNodes.forEach(removedNode => {
+        if (removedNode.nodeName === 'DIALOG') {
+          removedNode.removeEventListener('click', lightDismiss)
+          removedNode.removeEventListener('close', dialogClose)
+          removedNode.dispatchEvent(dialogRemovedEvent)
+        }
+      })
+    })
+  }
+
 
   const dialogAttrObserver = new MutationObserver(openingMutation)
+  const dialogDeleteObserver = new MutationObserver(deletingMutation)
 
   export default async function (dialog) {
     dialog.addEventListener('click', lightDismiss)
     dialog.addEventListener('close', dialogClose)
+    dialogAttrObserver.observe(dialog, {
+      attributes: false
+     })
+    dialogDeleteObserver.observe(document.body, {
+      attributes: false,
+      subtree: false,
+      childList: false
+     })
   }
 
   const lightDismiss = ({target:dialog}) => {
