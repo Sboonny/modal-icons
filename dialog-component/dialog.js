@@ -4,8 +4,6 @@
   const dialogOpeningEvent = new Event('opening')
   const dialogOpenedEvent  = new Event('opened')
   const dialogRemovedEvent  = new Event('remove')
-  
-  // removing loading attribute
 
   //track opening
   const openingMutation =  async (mutations, attrObeserver) => {
@@ -63,6 +61,8 @@
       subtree: false,
       childList: false
      })
+     await animationsComplete(dialog)
+     dialog.removeAttribute('loading')
   }
 
   const lightDismiss = ({target:dialog}) => {
