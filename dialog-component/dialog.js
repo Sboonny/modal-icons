@@ -1,6 +1,6 @@
 // ToDo
-  // add closing and closed events
-  // add opening and opened events
+  const dialogClosingEvent = new Event('closing')
+  const dialogClosedEvent = new Event('closed')
   const dialogOpeningEvent = new Event('opening')
   const dialogOpenedEvent  = new Event('opened')
   // add removed event
@@ -40,10 +40,26 @@
 
   export default async function (dialog) {
     dialog.addEventListener('click', lightDismiss)
+    dialog.addEventListener('close', dialogClose)
   }
 
   const lightDismiss = ({target:dialog}) => {
     //  after watching click on dialog element
     //  it closes when if it's top-element is clicked
       if (dialog.nodeName === 'DIALOG') dialog.close('dismiss')
+  }
+
+  const dialogClose = async ({target:dialog}) => {
+   dialog.setAttribute('inert','')
+   dialog.dispatchEvent(dialogClosingEvent)
+
+   await animationComplete(dialog)
+
+   dialog.dispatchEvent(dialogClosedEvent)
+  }
+
+  const animationComplete = (element) => {
+    Promise.allSettled(
+      element.getAnimation().map(animation => animation.finished)
+    )
   }
