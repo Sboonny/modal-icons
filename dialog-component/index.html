@@ -5,10 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dialog</title>
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="Canvas">
+    <meta name="color-scheme" content="light dark">
+
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <dialog id="megaDialog" modal-mode="mega">
+    <dialog id="MegaDialog" inert loading modal-mode="mega">
       <form method="dialog">
         <header>
           <h3>Title</h3>
@@ -29,7 +34,7 @@
         </footer>
       </form>
     </dialog>
-    <dialog id="miniDialog" modal-mode="mini">
+    <dialog id="MiniDialog" inert loading modal-mode="mini">
       <form method="dialog">
         <article>
           <p>Do you wanna remove this user?</p>
@@ -43,8 +48,8 @@
       </form>
     </dialog>
     
-    <button onclick="miniDialog.showModal()">Open MiniDialog</button>
-    <button onclick="megaDialog.showModal()">Open MegaDialog</button>
+    <button onclick="window.MiniDialog.showModal()">Open MiniDialog</button>
+    <button onclick="window.MegaDialog.showModal()">Open MegaDialog</button>
     <script src="script.js" type="module"></script>
   </body>
 </html>
